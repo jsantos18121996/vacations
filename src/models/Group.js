@@ -3,23 +3,19 @@ const { Schema, model } = require('mongoose');
 const GroupSchema = Schema({
     name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     phoneContact: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     start: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     end: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     }
 })
 
@@ -29,4 +25,4 @@ GroupSchema.method('toJSON', function () {
     return object;
 })
 
-module.exports = model("group", GroupSchema);
+module.exports = model("grupo", GroupSchema);

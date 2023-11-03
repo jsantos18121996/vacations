@@ -44,11 +44,42 @@ router.post('/add', async(req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({
+        res.status(200).json({
             ok: false,
-            message: "No pudo crearse el grupo"
+            message: "No se pudo crear el grupo - excepción general",
+            group: null
         });
     }
 });
+
+router.get('/:id', async(req, res) => {
+    const groupsService = new GroupsService();
+    try {
+        const groupRS = await groupsService.findGroupById(req.params.id);
+        console.log('groupRS ->     ', groupRS);
+        if(groupRS.errorMessage === null) {
+            res.json({
+                ok: true,
+                group: groupRS.group,
+                status: groupRS.status,
+                message: "Grupo encontrado exitosamente!"
+            });
+        } else {
+            res.json({
+                ok: false,
+                group: groupRS.group,
+                status: groupRS.status,
+                message: groupRS.errorMessage
+            })
+        }
+       
+    } catch (error) {
+        res.status(200).json({
+            ok: false,
+            group: null,
+            message: "No se encontró al grupo - excepción general"
+        });
+    }
+})
 
 module.exports = router;

@@ -14,6 +14,35 @@ class GroupsService {
 
     }
 
+    async findGroupById(id) {
+        try {
+            console.log('id ! ', id);
+            let group = await Group.findById(id);
+            console.log('grupo encontrado .. ', group);
+            if(group) {
+                return {
+                    group : group,
+                    status: 200,
+                    errorMessage: null
+                }
+            } else {
+                return {
+                    group : null,
+                    status: 200,
+                    errorMessage: "No se encontró el grupo"
+                }
+            }
+        } catch (error) {
+            console.error('error in findGroupById', error);
+            return {
+                group: null,
+                status: 500,
+                errorMessage: "No pudo se pudo consultar a la BD"
+            };
+        }
+
+    }
+
     async addGroup(request) {
 
         try {
