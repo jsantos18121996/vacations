@@ -3,11 +3,11 @@ const router = Router();
 
 const FamiliesService = require('../service/familiesService');
 
-router.get('/all', (req, res) => {
+router.get('/all', async(req, res) => {
 
     const familiesService = new FamiliesService();
     try {
-        const families = familiesService.getAllFamilies();
+        const families = await familiesService.getAllFamilies();
         res.status(200).json({
             ok: true,
             families: families

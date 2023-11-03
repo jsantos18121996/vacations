@@ -3,11 +3,11 @@ const router = Router();
 
 const GroupsService = require('../service/groupsService');
 
-router.get('/all', (req, res) => {
+router.get('/all', async(req, res) => {
 
     const groupsService = new GroupsService();
     try {
-        const groups = groupsService.getAllGroups();
+        const groups = await groupsService.getAllGroups();
         res.status(200).json({
             ok: true,
             groups: groups
